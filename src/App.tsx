@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { FileQuestion } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import { Button } from "./components/ui/button";
 import {
   Form,
@@ -105,7 +105,10 @@ export const EditBookForm = (defaultValue: BookDTO) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>title</FormLabel>
-                        <Input {...field} className="col-span-3" />
+                        <Input
+                          {...field}
+                          className="col-span-4 min-w-[375px]"
+                        />
                         <FormMessage />
                       </FormItem>
                     )}
@@ -118,7 +121,10 @@ export const EditBookForm = (defaultValue: BookDTO) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Author</FormLabel>
-                        <Input {...field} className="col-span-3" />
+                        <Input
+                          {...field}
+                          className="col-span-3 min-w-[375px]"
+                        />
                         <FormMessage />
                       </FormItem>
                     )}
@@ -155,7 +161,7 @@ export const DeleteBookForm = () => {
               </DialogDescription>
             </DialogHeader>
             <div className="">
-              <FileQuestion className="size-20 text-center m-auto" />
+              <HelpCircle className="size-20 text-center m-auto text-red-500" />
             </div>
             <DialogFooter>
               <Button variant={"destructive"} type="submit">
