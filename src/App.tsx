@@ -20,12 +20,13 @@ import {
 import { Label } from "./components/ui/label";
 import { Skeleton } from "./components/ui/skeleton";
 import { useEditBooks } from "./feature/books/hooks/useEditBook";
-import useGetBooksDatas from "./feature/books/hooks/useGetBooksDatas";
+// import useGetBooksDatas from "./feature/books/hooks/useGetBooksDatas";
 import type { BookDTO } from "./feature/books/type/book.type";
+import useBooksDatas from "./feature/books/hooks/useBooksDatas";
 // import useBooksDatas from "./feature/books/hooks/useBooksDatas";
 function App() {
-  const { books, isLoading } = useGetBooksDatas();
-  // const { books, isLoading } = useBooksDatas();
+  // const { books, isLoading } = useGetBooksDatas();
+  const { books, isLoading } = useBooksDatas();
 
   return (
     <>

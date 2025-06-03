@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as TestImport } from './routes/test'
+import { Route as CreatePdfImport } from './routes/create-pdf'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
@@ -20,6 +21,12 @@ import { Route as IndexImport } from './routes/index'
 const TestRoute = TestImport.update({
   id: '/test',
   path: '/test',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CreatePdfRoute = CreatePdfImport.update({
+  id: '/create-pdf',
+  path: '/create-pdf',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,6 +60,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/create-pdf': {
+      id: '/create-pdf'
+      path: '/create-pdf'
+      fullPath: '/create-pdf'
+      preLoaderRoute: typeof CreatePdfImport
+      parentRoute: typeof rootRoute
+    }
     '/test': {
       id: '/test'
       path: '/test'
@@ -68,12 +82,14 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/create-pdf': typeof CreatePdfRoute
   '/test': typeof TestRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/create-pdf': typeof CreatePdfRoute
   '/test': typeof TestRoute
 }
 
@@ -81,27 +97,30 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/create-pdf': typeof CreatePdfRoute
   '/test': typeof TestRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/test'
+  fullPaths: '/' | '/about' | '/create-pdf' | '/test'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/test'
-  id: '__root__' | '/' | '/about' | '/test'
+  to: '/' | '/about' | '/create-pdf' | '/test'
+  id: '__root__' | '/' | '/about' | '/create-pdf' | '/test'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CreatePdfRoute: typeof CreatePdfRoute
   TestRoute: typeof TestRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CreatePdfRoute: CreatePdfRoute,
   TestRoute: TestRoute,
 }
 
@@ -117,6 +136,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/create-pdf",
         "/test"
       ]
     },
@@ -125,6 +145,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/create-pdf": {
+      "filePath": "create-pdf.tsx"
     },
     "/test": {
       "filePath": "test.tsx"

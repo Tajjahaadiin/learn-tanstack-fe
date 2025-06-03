@@ -5,6 +5,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import api from "@/service/api";
 import { toast } from "sonner";
 import { useState } from "react";
+import { isAxiosError } from "axios";
 
 export function useEditBooks(defaultValues: BookDTO) {
   const [isOpen, setIsopen] = useState<boolean>(false);
@@ -21,7 +22,6 @@ export function useEditBooks(defaultValues: BookDTO) {
   const { isPending, mutateAsync } = useMutation<BookDTO, Error, BookDTO>({
     mutationKey: ["EditBook"],
     mutationFn: async ({ id, author, title }: BookDTO) => {
-      console.log("test");
       const response = await api.put<BookDTO>(`/books/${id}`, {
         author,
         title,
@@ -31,7 +31,7 @@ export function useEditBooks(defaultValues: BookDTO) {
     },
     onError: (error) => {
       console.log(error);
-      if (error) {
+      if (isAxiosError(error)) {
         return toast.error(error.message || "something went wrong", {});
       }
 
